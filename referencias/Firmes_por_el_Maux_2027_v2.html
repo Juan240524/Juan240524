@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firmes por el Mauxi 2027</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --azul: #1a3a5c;
+    --dorado: #b8922a;
+    --dorado-claro: #f5e9cc;
+    --blanco: #fefcf8;
+    --gris: #f4f1ec;
+    --texto: #1e1e1e;
+    --eje-academico: #1a3a5c;
+    --eje-convivencial: #2d6e5c;
+    --eje-ambiental: #c75a1a;
+    --eje-cultural: #5a3472;
+    --line: #e0dbd0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--blanco); color: var(--texto); line-height: 1.7; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--azul);
+    color: white;
+    padding: 3rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-deco {
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.05;
+    font-family: 'DM Serif Display', serif;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  header .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+  }
+  header h1 em { color: var(--dorado); font-style: italic; }
+  header .sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.8);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    max-width: 800px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    color: #444;
+    text-align: center;
+  }
+  .intro strong { color: var(--azul); }
+
+  /* ── EJE HEADERS ── */
+  .eje-header {
+    max-width: 1000px;
+    margin: 3rem auto 0.5rem;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .eje-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--texto);
+    white-space: nowrap;
+  }
+  .eje-line { flex: 1; height: 2px; background: var(--gris); }
+
+  .eje-intro {
+    max-width: 1000px;
+    margin: 0 auto 1.5rem;
+    padding: 0 1.5rem;
+    font-size: 0.88rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* ── PROPOSALS GRID (principales) ── */
+  .proposals {
+    max-width: 1000px;
+    margin: 0 auto 0.5rem;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+  }
+  .card:hover { transform: translateY(-4px); }
+
+  .card-header {
+    padding: 1.5rem;
+    color: white;
+    position: relative;
+  }
+  .card-header .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem;
+    opacity: 0.1;
+    position: absolute;
+    right: 1rem;
+    top: -0.5rem;
+    line-height: 1;
+  }
+  .card-header .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: 700;
+  }
+  .card-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+
+  .card-body {
+    background: white;
+    padding: 1.5rem;
+    flex: 1;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  .card-body p { margin-bottom: 1rem; }
+  .card-body p:last-child { margin-bottom: 0; }
+
+  /* eje colors */
+  .eje-aca .card-header { background: var(--eje-academico); }
+  .eje-aca .tag { color: #a8cfee; }
+  .eje-con .card-header { background: var(--eje-convivencial); }
+  .eje-con .tag { color: #a8eecf; }
+  .eje-amb .card-header { background: var(--eje-ambiental); }
+  .eje-amb .tag { color: #eed5a8; }
+  .eje-cul .card-header { background: var(--eje-cultural); }
+  .eje-cul .tag { color: #dca8ee; }
+
+  /* impact dots */
+  .impact {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gris);
+  }
+  .impact-label { font-size: 0.72rem; font-weight: 700; color: #888; margin-right: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #eee; }
+  .dot.on { background: var(--dorado); }
+
+  /* ── EXPRESS DIVIDER ── */
+  .express-divider {
+    max-width: 1000px;
+    margin: 2rem auto 1.2rem;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .express-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.85rem;
+    border-radius: 99px;
+    border: 1.5px solid currentColor;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .eje-aca-pill { color: var(--eje-academico); border-color: var(--eje-academico); }
+  .eje-con-pill { color: var(--eje-convivencial); border-color: var(--eje-convivencial); }
+  .eje-amb-pill { color: var(--eje-ambiental); border-color: var(--eje-ambiental); }
+  .eje-cul-pill { color: var(--eje-cultural); border-color: var(--eje-cultural); }
+  .express-line { flex: 1; height: 1px; background: var(--line); }
+
+  /* ── EXPRESS GRID ── */
+  .express-grid {
+    max-width: 1000px;
+    margin: 0 auto 1rem;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .xcard {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    background: white;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .xcard:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+  .xcard-top {
+    padding: 1rem 1.1rem 0.8rem;
+    color: white;
+    position: relative;
+  }
+  .xcard-top .xicon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.4rem;
+    opacity: 0.92;
+  }
+  .xcard-top .xtag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .xcard-top h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    font-weight: 400;
+  }
+  .xcard-body {
+    padding: 0.9rem 1.1rem 1rem;
+    font-size: 0.82rem;
+    color: #444;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .xcard-footer {
+    padding: 0.6rem 1.1rem;
+    background: var(--gris);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* xcard color variants */
+  .xa .xcard-top  { background: var(--eje-academico); }
+  .xc .xcard-top  { background: var(--eje-convivencial); }
+  .xm .xcard-top  { background: var(--eje-ambiental); }
+  .xu .xcard-top  { background: var(--eje-cultural); }
+
+  /* ── HOW-TO STRIP ── */
+  .howto-strip {
+    max-width: 1000px;
+    margin: 1rem auto 0.5rem;
+    padding: 0 1.5rem;
+  }
+  .howto-inner {
+    background: var(--gris);
+    border-radius: 10px;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 0.82rem;
+    color: #555;
+    flex-wrap: wrap;
+  }
+  .howto-inner strong { color: var(--azul); white-space: nowrap; }
+  .howto-sep { color: var(--dorado); font-size: 1rem; }
+
+  /* ── TECH ECOSYSTEM ── */
+  .ecosystem-wrap {
+    max-width: 1000px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .ecosystem {
+    background: var(--azul);
+    border-radius: 12px;
+    padding: 2rem;
+    color: white;
+  }
+  .ecosystem h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--dorado);
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+  }
+  .ecosystem p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 1.5rem; }
+  .eco-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .eco-node {
+    background: var(--azul);
+    padding: 1rem;
+    text-align: center;
+  }
+  .eco-node .e-icon { font-size: 1.5rem; display: block; margin-bottom: 0.4rem; }
+  .eco-node .e-name { font-size: 0.78rem; font-weight: 700; color: white; margin-bottom: 0.2rem; }
+  .eco-node .e-use { font-size: 0.68rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: #888;
+    background: var(--gris);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-deco">INNOVACIÓN</div>
+  <div class="eyebrow">Firmes por el Mauxi 2027</div>
+  <h1>Rompiendo paradigmas para la<br><em>Excelencia Integral</em></h1>
+  <p class="sub">Un modelo de gestión dividido en cuatro ejes estratégicos que transformará el rendimiento académico, la consciencia social, la convivencia y el entorno ambiental a través de la tecnología y la pedagogía cívica.</p>
+</header>
+
+<div class="intro">
+  <p>Cada eje tiene <strong>propuestas principales</strong> de largo aliento y <strong>propuestas express</strong> — acciones rápidas, de bajo costo y alto impacto visible que pueden arrancar en la primera semana. Juntas construyen la imagen de un colegio que hace cosas reales.</p>
+</div>
+
+
+<!-- ══════════════════════════════════ -->
+<!-- EJE I: ACADÉMICO -->
+<!-- ══════════════════════════════════ -->
+<div class="eje-header">
+  <h3 style="color: var(--eje-academico);">I. Ámbito Académico</h3>
+  <div class="eje-line"></div>
+</div>
+<p class="eje-intro">Llevar el aprendizaje del cuaderno al mundo real: debatir, investigar, enseñar y prepararse para la universidad con herramientas del siglo XXI.</p>
+
+<div class="proposals">
+  <div class="card eje-aca">
+    <div class="card-header">
+      <span class="num">1</span>
+      <span class="tag">Excelencia y Debate</span>
+      <h2>MAUXI MUN: Modelo de Naciones Unidas y Parlamento Escolar</h2>
+    </div>
+    <div class="card-body">
+      <p>Elevaremos el nivel académico e intelectual mediante el <strong>Modelo de Naciones Unidas y Parlamento Escolar</strong> apoyado en plataformas digitales. A través del debate sobre problemáticas reales de administración pública y política global, fomentaremos el pensamiento crítico, la investigación y la oratoria.</p>
+      <p>Usaremos aplicaciones de votación y redacción colaborativa en tiempo real, transformando el aprendizaje en un simulador de liderazgo global. En su segunda edición, el MAUXI MUN abre puertas a colegios invitados de Barranquilla, posicionando al colegio como referente académico de la ciudad.</p>
+      <div class="impact">
+        <span class="impact-label">Innovación</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card eje-aca">
+    <div class="card-header">
+      <span class="num">2</span>
+      <span class="tag">Apoyo Colaborativo</span>
+      <h2>Red "Tutorías 4.0": Plataforma de Talentos</h2>
+    </div>
+    <div class="card-body">
+      <p>La <strong>Red Tutorías 4.0</strong> es un sistema donde las estudiantes con facilidades en materias específicas (Matemáticas, Inglés, Ciencias) apadrinan académicamente a compañeras que lo necesiten. Gestionado mediante un registro digital rápido, las tutoras acumulan "puntos de liderazgo" canjeables por reconocimientos institucionales.</p>
+      <p>Democratizamos el conocimiento y subimos el promedio general del colegio trabajando en equipo, no compitiendo de forma individual.</p>
+      <div class="impact">
+        <span class="impact-label">Impacto en Notas</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card eje-aca">
+    <div class="card-header">
+      <span class="num">9</span>
+      <span class="tag">Liderazgo Académico</span>
+      <h2>Modelo Legacy: Referentes de 9° a 11°</h2>
+    </div>
+    <div class="card-body">
+      <p>El <strong>Modelo Legacy</strong> transforma a los grados superiores en referentes académicos y humanos para toda la institución. Fortalece habilidades de pensamiento crítico, argumentación y preparación para las Pruebas Saber mediante simulacros, espacios de formación y actividades que proyectan una cultura de excelencia.</p>
+      <p>La meta: que llegar a 9° en el MAUXI signifique entrar a un nivel de exigencia y orgullo académico diferente.</p>
+      <div class="impact">
+        <span class="impact-label">Excelencia</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPRESS ACADÉMICO -->
+<div class="express-divider">
+  <span class="express-pill eje-aca-pill">⚡ Propuestas Express — Académico</span>
+  <div class="express-line"></div>
+</div>
+<div class="howto-strip">
+  <div class="howto-inner">
+    <strong>¿Qué es una propuesta express?</strong>
+    <span class="howto-sep">·</span>
+    Acciones concretas, sin presupuesto, ejecutables en menos de 2 semanas.
+    <span class="howto-sep">·</span>
+    Complementan las propuestas principales y generan visibilidad inmediata.
+  </div>
+</div>
+<div class="express-grid">
+
+  <div class="xcard xa">
+    <div class="xcard-top">
+      <span class="xicon">🏆</span>
+      <span class="xtag">Motivación · Semanal</span>
+      <h4>Tablero de Estrellas MAUXI</h4>
+    </div>
+    <div class="xcard-body">Cartelera física y digital (actualizada cada lunes) con el estudiante de mejor desempeño por materia y grado esa semana. No solo notas: también mejora, esfuerzo y participación. Rompe el modelo donde solo se reconoce al de siempre.</div>
+    <div class="xcard-footer">🛠 Canva + tablero físico · arranque: día 1</div>
+  </div>
+
+  <div class="xcard xa">
+    <div class="xcard-top">
+      <span class="xicon">🎙️</span>
+      <span class="xtag">Oratoria · Express</span>
+      <h4>Reto de 60 Segundos</h4>
+    </div>
+    <div class="xcard-body">Un micrófono abierto mensual en el descanso: cualquier estudiante tiene 60 segundos para hablar sobre un tema de actualidad. Sin preparación previa obligatoria. Entrena oratoria espontánea y alimenta directamente las habilidades del MUN.</div>
+    <div class="xcard-footer">🛠 Micrófono + espacio en patio · coste cero</div>
+  </div>
+
+  <div class="xcard xa">
+    <div class="xcard-top">
+      <span class="xicon">📰</span>
+      <span class="xtag">Actualidad · Semanal</span>
+      <h4>Noticia de la Semana MAUXI</h4>
+    </div>
+    <div class="xcard-body">Cada lunes, la personería publica en el canal estudiantil una noticia de actualidad (Colombia o mundo) con 3 preguntas para reflexionar. Los docentes pueden usarla como apertura de clase. Conecta el colegio con el mundo real sin carga curricular extra.</div>
+    <div class="xcard-footer">🛠 WhatsApp / Instagram · 20 min de trabajo</div>
+  </div>
+
+  <div class="xcard xa">
+    <div class="xcard-top">
+      <span class="xicon">🧩</span>
+      <span class="xtag">Saber 11 · Preparación</span>
+      <h4>Quiz Relámpago Inter-Grados</h4>
+    </div>
+    <div class="xcard-body">Torneo mensual de preguntas tipo Saber 11 vía Kahoot o Mentimeter en el descanso. 10 preguntas, 15 minutos, todos los grados compiten. Gamifica la preparación para las pruebas estatales sin que se sienta a estudio. El salón ganador recibe reconocimiento público.</div>
+    <div class="xcard-footer">🛠 Kahoot (gratis) · organizable en 1 día</div>
+  </div>
+
+  <div class="xcard xa">
+    <div class="xcard-top">
+      <span class="xicon">🎓</span>
+      <span class="xtag">Vocación · Orientación</span>
+      <h4>Feria de Carreras Universitarias</h4>
+    </div>
+    <div class="xcard-body">Jornada de un día donde ex-alumnas universitarias (contactadas vía WhatsApp) presentan su carrera en 5 minutos a los grados 9°–11°. Sin costos: solo coordinación. Conecta las decisiones académicas con personas reales que ya pasaron por el colegio.</div>
+    <div class="xcard-footer">🛠 Red de ex-alumnas · 1 tarde · coste cero</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════ -->
+<!-- EJE II: CONVIVENCIAL -->
+<!-- ══════════════════════════════════ -->
+<div class="eje-header">
+  <h3 style="color: var(--eje-convivencial);">II. Ámbito Convivencial</h3>
+  <div class="eje-line"></div>
+</div>
+<p class="eje-intro">Reemplazar la cultura del castigo por una cultura de paz construida por los propios estudiantes: mediación real, bienestar emocional y comunidad que se cuida sola.</p>
+
+<div class="proposals">
+  <div class="card eje-con">
+    <div class="card-header">
+      <span class="num">3</span>
+      <span class="tag">Pedagogía Cívica</span>
+      <h2>Cultura Activa: Autorregulación y Cero Firmas</h2>
+    </div>
+    <div class="card-body">
+      <p>Cambiaremos la cultura del miedo a la "firma disciplinaria" por la <strong>autorregulación ciudadana</strong>. Mediante el uso de "tarjetas visuales" y acciones pedagógicas creativas lideradas por las mismas estudiantes, corregiremos comportamientos disruptivos con humor y empatía antes de que requieran una sanción formal.</p>
+      <p>El objetivo es elevar las notas convivenciales haciendo que lo correcto sea la norma social, no una obligación impuesta.</p>
+      <div class="impact">
+        <span class="impact-label">Reducción de Firmas</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card eje-con">
+    <div class="card-header">
+      <span class="num">4</span>
+      <span class="tag">Gestión Institucional</span>
+      <h2>Gabinete Institucional y Red de Vocerías</h2>
+    </div>
+    <div class="card-body">
+      <p>La Personería se convierte en un <strong>Gabinete de Trabajo</strong> articulado con las voceras de cada salón. A través de formularios digitales y tableros de datos, las voceras reportan en tiempo real el clima convivencial de sus aulas. Esto permite identificar focos de tensión e intervenir con mediación antes de que escalen.</p>
+      <p>Un canal directo, tecnológico y eficiente entre la base estudiantil y las directivas.</p>
+      <div class="impact">
+        <span class="impact-label">Efectividad</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card eje-con">
+    <div class="card-header">
+      <span class="num">10</span>
+      <span class="tag">Reconocimiento</span>
+      <h2>Modelo 20: Las Voces que Elevan</h2>
+    </div>
+    <div class="card-body">
+      <p>El <strong>Modelo 20</strong> reconoce semestralmente a los veinte estudiantes que se destacan por comportamiento, liderazgo, sentido de pertenencia y compromiso con los valores institucionales. Más que un premio, es una estrategia para fortalecer la convivencia mediante incentivos positivos.</p>
+      <p>Promueve que cada estudiante encuentre motivación para convertirse en ejemplo dentro y fuera del aula.</p>
+      <div class="impact">
+        <span class="impact-label">Convivencia</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPRESS CONVIVENCIAL -->
+<div class="express-divider">
+  <span class="express-pill eje-con-pill">⚡ Propuestas Express — Convivencia</span>
+  <div class="express-line"></div>
+</div>
+<div class="express-grid">
+
+  <div class="xcard xc">
+    <div class="xcard-top">
+      <span class="xicon">💌</span>
+      <span class="xtag">Empatía · Mensual</span>
+      <h4>Cartas Anónimas de Gratitud</h4>
+    </div>
+    <div class="xcard-body">Una vez al mes, cada salón escribe cartas anónimas de gratitud o reconocimiento a un compañero o docente. Se entregan físicamente. Costo: papel. Impacto: el clima emocional del aula cambia en un día. Sencillo, pero transforma la cultura.</div>
+    <div class="xcard-footer">🛠 Papel y lápiz · organizable en 30 min</div>
+  </div>
+
+  <div class="xcard xc">
+    <div class="xcard-top">
+      <span class="xicon">🎭</span>
+      <span class="xtag">Conciencia · Teatro</span>
+      <h4>Teatro Invisible en el Patio</h4>
+    </div>
+    <div class="xcard-body">Intervenciones artísticas sorpresa de 5 minutos durante el descanso: estudiantes voluntarios actúan escenas de bullying, discriminación o empatía sin avisar. El patio se convierte en escenario. Genera reflexión inmediata y rompe la rutina con impacto real.</div>
+    <div class="xcard-footer">🛠 Voluntarios + un guión · sin costo</div>
+  </div>
+
+  <div class="xcard xc">
+    <div class="xcard-top">
+      <span class="xicon">📊</span>
+      <span class="xtag">Clima Escolar · Digital</span>
+      <h4>Termómetro Semanal de Bienestar</h4>
+    </div>
+    <div class="xcard-body">Formulario anónimo de 3 preguntas (Google Forms) que se envía cada viernes a través de los voceros. Mide el estado emocional del colegio en tiempo real. Los resultados agregados se comparten con orientación y el gabinete. Lo que se mide, se puede mejorar.</div>
+    <div class="xcard-footer">🛠 Google Forms · 10 min de configuración</div>
+  </div>
+
+  <div class="xcard xc">
+    <div class="xcard-top">
+      <span class="xicon">🤲</span>
+      <span class="xtag">Inclusión · Acción</span>
+      <h4>Un Día Sin Barreras</h4>
+    </div>
+    <div class="xcard-body">Jornada de 2 horas donde los estudiantes experimentan barreras de aprendizaje simuladas: vendas, protectores auditivos, escritura con la mano no dominante. Pasan de la tolerancia a la empatía real. Alimenta directamente la campaña de inclusión del colegio.</div>
+    <div class="xcard-footer">🛠 Materiales básicos · 1 tarde por grado</div>
+  </div>
+
+  <div class="xcard xc">
+    <div class="xcard-top">
+      <span class="xicon">🌅</span>
+      <span class="xtag">Salud Mental · Diario</span>
+      <h4>Minuto de Calma Institucional</h4>
+    </div>
+    <div class="xcard-body">Un minuto diario de silencio activo al inicio de la primera clase: respiración guiada, música suave o una frase reflexiva leída por la personería por el altavoz. Cero tiempo curricular perdido. Establece un ritual de calma que distingue al colegio.</div>
+    <div class="xcard-footer">🛠 Altavoz + frase del día · coste cero</div>
+  </div>
+
+  <div class="xcard xc">
+    <div class="xcard-top">
+      <span class="xicon">🏅</span>
+      <span class="xtag">Reconocimiento · Semanal</span>
+      <h4>Estudiante de la Semana</h4>
+    </div>
+    <div class="xcard-body">Cada semana, el gabinete elige (con sugerencias de voceros) una estudiante destacada por un valor específico: no una nota, sino un acto de liderazgo, ayuda o creatividad. Su foto y historia van al canal MAUXI y al tablero del colegio. Reconocer lo bueno lo multiplica.</div>
+    <div class="xcard-footer">🛠 Canva + Instagram · 15 min por semana</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════ -->
+<!-- EJE III: MEDIOAMBIENTAL -->
+<!-- ══════════════════════════════════ -->
+<div class="eje-header">
+  <h3 style="color: var(--eje-ambiental);">III. Ámbito Medioambiental</h3>
+  <div class="eje-line"></div>
+</div>
+<p class="eje-intro">Cero carteles de reciclaje que nadie lee. El colegio se convierte en laboratorio vivo: datos reales, tecnología real, resultados que se publican y se comparan.</p>
+
+<div class="proposals">
+  <div class="card eje-amb">
+    <div class="card-header">
+      <span class="num">5</span>
+      <span class="tag">Desarrollo Tecnológico</span>
+      <h2>Incubadora Eco-Tech: Proyectos Estudiantiles de Impacto</h2>
+    </div>
+    <div class="card-body">
+      <p>Romperemos el modelo de la cartelera sobre reciclaje. La <strong>Incubadora Eco-Tech</strong> es un espacio donde las estudiantes diseñan proyectos tecnológicos reales para resolver problemas ambientales del colegio: apps de reciclaje por salones, automatización de energía, integración de datos de los paneles solares.</p>
+      <p>Las mejores propuestas se presentan a la Rectoría para su implementación. Aquí, la ciencia se convierte en consciencia.</p>
+      <div class="impact">
+        <span class="impact-label">Innovación</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card eje-amb">
+    <div class="card-header">
+      <span class="num">6</span>
+      <span class="tag">Datos y Gamificación</span>
+      <h2>Dashboard de Sostenibilidad Escolar en Tiempo Real</h2>
+    </div>
+    <div class="card-body">
+      <p>Un <strong>tablero digital público</strong> que mide la huella de carbono e impacto ecológico del colegio: energía de los paneles solares, agua consumida, material reciclado por grados. Con estos datos, gamificamos el cuidado ambiental: el salón con mejores métricas mensuales recibe reconocimiento especial.</p>
+      <p>Lo que se mide, se mejora. Y lo que se publica, genera orgullo.</p>
+      <div class="impact">
+        <span class="impact-label">Impacto Real</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card eje-amb">
+    <div class="card-header">
+      <span class="num">11</span>
+      <span class="tag">Tecnología Ambiental</span>
+      <h2>Sistema de Reciclaje Institucional con Seguimiento Digital</h2>
+    </div>
+    <div class="card-body">
+      <p>Un sistema de reciclaje apoyado en herramientas tecnológicas que organiza, mide y fortalece la correcta separación de residuos por cursos. Con retos ecológicos y estrategias de participación estudiantil, consolida una cultura ambiental moderna basada en resultados medibles, no en buenas intenciones.</p>
+      <div class="impact">
+        <span class="impact-label">Sostenibilidad</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPRESS AMBIENTAL -->
+<div class="express-divider">
+  <span class="express-pill eje-amb-pill">⚡ Propuestas Express — Ambiente</span>
+  <div class="express-line"></div>
+</div>
+<div class="express-grid">
+
+  <div class="xcard xm">
+    <div class="xcard-top">
+      <span class="xicon">☀️</span>
+      <span class="xtag">Paneles Solares · Datos</span>
+      <h4>Panel Solar como Aula Viva</h4>
+    </div>
+    <div class="xcard-body">Cada mes, un grupo de 10°–11° calcula cuánta energía generaron los paneles del colegio, el CO₂ evitado y el ahorro económico estimado. El resultado se publica en el canal MAUXI como un "informe mensual solar". Los paneles dejan de ser decoración y se vuelven herramienta pedagógica.</div>
+    <div class="xcard-footer">🛠 Google Sheets + datos de dirección · mensual</div>
+  </div>
+
+  <div class="xcard xm">
+    <div class="xcard-top">
+      <span class="xicon">🌱</span>
+      <span class="xtag">Biodiversidad · Visual</span>
+      <h4>Mapa Verde del Colegio</h4>
+    </div>
+    <div class="xcard-body">Los estudiantes de 6°–7° identifican, fotografían y etiquetan todas las plantas del colegio con QR que explican su especie, origen y beneficios. Se crea un mapa digital del colegio visto como ecosistema. Rompe el modelo de la clase de biología entre cuatro paredes.</div>
+    <div class="xcard-footer">🛠 Canva + QR gratuitos · proyecto de una semana</div>
+  </div>
+
+  <div class="xcard xm">
+    <div class="xcard-top">
+      <span class="xicon">🚿</span>
+      <span class="xtag">Agua · Auditoría</span>
+      <h4>Reto Cero Desperdicio de Agua</h4>
+    </div>
+    <div class="xcard-body">Campaña mensual con reto visual: el "medidor de agua" del colegio (registro manual o digital de grifos en mal estado reportados y reparados). Cada reporte solucionado suma puntos al salón que lo detectó. Premia la observación crítica del entorno.</div>
+    <div class="xcard-footer">🛠 Formulario de reporte + tablero físico</div>
+  </div>
+
+  <div class="xcard xm">
+    <div class="xcard-top">
+      <span class="xicon">♻️</span>
+      <span class="xtag">Residuos · Gamificación</span>
+      <h4>Liga del Reciclaje por Salones</h4>
+    </div>
+    <div class="xcard-body">Tabla de posiciones semanal de reciclaje por salón, publicada en el canal y en carteleras. Las voceras son jueces de reciclaje de su salón. El salón líder al mes recibe un beneficio pequeño (tiempo libre, música en el descanso). Hace la competencia sana y visible.</div>
+    <div class="xcard-footer">🛠 Tabla en Canva + voceras coordinadoras</div>
+  </div>
+
+  <div class="xcard xm">
+    <div class="xcard-top">
+      <span class="xicon">🌍</span>
+      <span class="xtag">Fechas Clave · Acción</span>
+      <h4>Calendario Ambiental MAUXI</h4>
+    </div>
+    <div class="xcard-body">Un calendario anual con fechas ambientales clave (Día del Agua, Día de la Tierra, Día del Reciclaje) con una acción concreta planeada para cada una: plantación, limpieza del patio, publicación de datos, charla en descanso. Cada fecha es un hito visible para la comunidad.</div>
+    <div class="xcard-footer">🛠 Canva · planeable en 1 hora · todo el año</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════ -->
+<!-- EJE IV: CULTURAL Y SOCIAL -->
+<!-- ══════════════════════════════════ -->
+<div class="eje-header">
+  <h3 style="color: var(--eje-cultural);">IV. Ámbito Cultural y Social</h3>
+  <div class="eje-line"></div>
+</div>
+<p class="eje-intro">Construir identidad colectiva, memoria histórica y consciencia ciudadana — especialmente en el año que más lo exige: el camino al centenario.</p>
+
+<div class="proposals">
+  <div class="card eje-cul">
+    <div class="card-header">
+      <span class="num">7</span>
+      <span class="tag">Impacto y Reflexión</span>
+      <h2>Intervenciones Simbólicas de Consciencia Social</h2>
+    </div>
+    <div class="card-body">
+      <p>Implementaremos <strong>"Teatro Invisible"</strong> sorpresa durante los descansos: representaciones artísticas cortas de alto impacto visual sobre empatía, inclusión, prevención del acoso y realidad social. Estas acciones rompen la rutina y generan reflexión profunda sin necesidad de un aula.</p>
+      <p>La cultura de pensamiento crítico no se enseña, se vive. Y el patio es el mejor escenario.</p>
+      <div class="impact">
+        <span class="impact-label">Reflexión</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card eje-cul">
+    <div class="card-header">
+      <span class="num">8</span>
+      <span class="tag">Legado Centenario</span>
+      <h2>Proyecto MAUXI100 — Archivo Vivo del Centenario</h2>
+    </div>
+    <div class="card-body">
+      <p>En el marco del camino al centenario (1927–2027), la Personería lidera la construcción de un <strong>archivo digital vivo</strong>: fotografías históricas, testimonios de ex-alumnas, evolución del colegio, banco de voces grabadas, minidocumentales por décadas y un mural con QR interactivos en el corredor principal.</p>
+      <p>Más que un proyecto de un año: es el legado cultural que la Promoción 100 le deja al colegio.</p>
+      <div class="impact">
+        <span class="impact-label">Trascendencia</span>
+        <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPRESS CULTURAL -->
+<div class="express-divider">
+  <span class="express-pill eje-cul-pill">⚡ Propuestas Express — Cultural y Social</span>
+  <div class="express-line"></div>
+</div>
+<div class="express-grid">
+
+  <div class="xcard xu">
+    <div class="xcard-top">
+      <span class="xicon">📸</span>
+      <span class="xtag">Centenario · Semanal</span>
+      <h4>#TBT MAUXI: Foto Histórica de la Semana</h4>
+    </div>
+    <div class="xcard-body">Cada jueves, el canal MAUXI publica una foto histórica del colegio con su contexto: año, quiénes aparecen, qué estaba pasando en Colombia ese día. Simple, consistente y acumulativo. Al final del año, es un álbum de 40 momentos históricos que alimenta el MAUXI100.</div>
+    <div class="xcard-footer">🛠 Instagram + archivo del colegio · 20 min por semana</div>
+  </div>
+
+  <div class="xcard xu">
+    <div class="xcard-top">
+      <span class="xicon">🗣️</span>
+      <span class="xtag">Identidad · Mensual</span>
+      <h4>Voces del MAUXI: Entrevistas en Video</h4>
+    </div>
+    <div class="xcard-body">Un reel mensual corto (2 minutos) donde se entrevista a alguien de la comunidad: una hermana FMA con décadas en el colegio, una ex-alumna exitosa, una docente que lleva 20 años. Grabado con celular. Publicado en Instagram. Construye identidad y orgullo de pertenencia.</div>
+    <div class="xcard-footer">🛠 Celular + CapCut · 1 tarde al mes</div>
+  </div>
+
+  <div class="xcard xu">
+    <div class="xcard-top">
+      <span class="xicon">🎨</span>
+      <span class="xtag">Arte · Expresión</span>
+      <h4>Muro de la Palabra</h4>
+    </div>
+    <div class="xcard-body">Un espacio físico rotativo (cartelera o muro) donde cualquier estudiante puede publicar (anónimamente si quiere) un texto corto: poema, reflexión, denuncia simbólica, sueño. Moderado por la personería. Convierte el silencio estudiantil en expresión colectiva visible.</div>
+    <div class="xcard-footer">🛠 Cartelera + post-its o papel · coste mínimo</div>
+  </div>
+
+  <div class="xcard xu">
+    <div class="xcard-top">
+      <span class="xicon">🌐</span>
+      <span class="xtag">Ciudadanía · Digital</span>
+      <h4>Reto de Noticias Falsas</h4>
+    </div>
+    <div class="xcard-body">Taller mensual de 30 minutos en descanso o en clase: la personería presenta 5 noticias (algunas falsas, algunas reales) y los estudiantes deben identificar cuáles son fake news explicando su razonamiento. Forma pensamiento crítico digital de forma divertida y urgente.</div>
+    <div class="xcard-footer">🛠 Presentación Canva + Mentimeter · sin costo</div>
+  </div>
+
+  <div class="xcard xu">
+    <div class="xcard-top">
+      <span class="xicon">💼</span>
+      <span class="xtag">Social · Acción</span>
+      <h4>MAUXI Ayuda: Jornada de Impacto Barrio</h4>
+    </div>
+    <div class="xcard-body">Una vez por semestre, la personería organiza una jornada de servicio social en el barrio del colegio: limpieza, apoyo a adultos mayores, recolección de útiles para niños de bajos recursos. No es caridad, es ciudadanía activa. Y es fotografiable para el canal.</div>
+    <div class="xcard-footer">🛠 Coordinación con directivas · 1 sábado al semestre</div>
+  </div>
+
+  <div class="xcard xu">
+    <div class="xcard-top">
+      <span class="xicon">🎤</span>
+      <span class="xtag">Centenario · Especial</span>
+      <h4>Cápsula del Tiempo 2027</h4>
+    </div>
+    <div class="xcard-body">Cada estudiante de 2026 escribe una carta para ser leída en 2077 (el 150 aniversario). Las cartas se sellan en una caja física enterrada o guardada en el archivo del colegio en diciembre 2026, en un acto público simbólico. El momento más memorable del centenario.</div>
+    <div class="xcard-footer">🛠 Papel + caja sellada · acto de diciembre</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════ -->
+<!-- ECOSISTEMA TECNOLÓGICO -->
+<!-- ══════════════════════════════════ -->
+<div class="ecosystem-wrap">
+  <div class="ecosystem">
+    <h3>Stack Tecnológico MAUXI 2027</h3>
+    <p>Todas las propuestas —principales y express— comparten herramientas gratuitas, accesibles desde el celular, sin necesidad de presupuesto tecnológico.</p>
+    <div class="eco-grid">
+      <div class="eco-node">
+        <span class="e-icon">🗂️</span>
+        <div class="e-name">Notion</div>
+        <div class="e-use">Hub central: cronogramas, actas y proyectos</div>
+      </div>
+      <div class="eco-node">
+        <span class="e-icon">🎨</span>
+        <div class="e-name">Canva</div>
+        <div class="e-use">Todo el material visual: tableros, afiches, carteleras</div>
+      </div>
+      <div class="eco-node">
+        <span class="e-icon">📊</span>
+        <div class="e-name">Google Workspace</div>
+        <div class="e-use">Forms, Sheets, Slides para datos y encuestas</div>
+      </div>
+      <div class="eco-node">
+        <span class="e-icon">🎮</span>
+        <div class="e-name">Kahoot / Mentimeter</div>
+        <div class="e-use">Quizzes, votaciones y debates en tiempo real</div>
+      </div>
+      <div class="eco-node">
+        <span class="e-icon">📱</span>
+        <div class="e-name">CapCut + Instagram</div>
+        <div class="e-use">Producción de reels, entrevistas y canal visual</div>
+      </div>
+      <div class="eco-node">
+        <span class="e-icon">🌱</span>
+        <div class="e-name">Arduino</div>
+        <div class="e-use">Sensores para la huerta y monitoreo ambiental</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  Plataforma de Gobierno Estudiantil · Colegio de María Auxiliadora · Barranquilla<br>
+  <em>Firmes por el Mauxi 2027 — Innovación, Excelencia y Consciencia Ciudadana</em>
+</footer>
+
+</body>
+</html>
